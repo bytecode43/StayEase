@@ -1,20 +1,22 @@
 // app/(tabs)/index.tsx
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import LocationBar from '@/components/LocationBar';
 import FilterTabs from '@/components/FilterTabs';
 import HotelCard, { Hotel } from '@/components/HotelCard';
 import { Colors } from '@/constants/Colors';
 
+// Sample data for demo purposes
 const sample: Hotel[] = [
   {
     id: '1',
@@ -22,7 +24,7 @@ const sample: Hotel[] = [
     price: 200.7,
     location: 'Alice Springs NT 0870',
     rating: 5,
-    image: require('../../assets/images/icon.png'),
+    image: require('../../assets/images/hotel1.png'),
   },
   {
     id: '2',
@@ -30,27 +32,25 @@ const sample: Hotel[] = [
     price: 175.9,
     location: 'Northern Territory, Australia',
     rating: 4.8,
-    image: require('../../assets/images/icon.png'),
+    image: require('../../assets/images/hotel1.png'),
   },
 ];
 
 export default function HomeScreen() {
-  const [filter, setFilter] = useState('Hotel');
+  const [filter, setFilter] = useState<string>('Hotel');
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView
-      style={[styles.screen, { paddingTop: insets.top + 16 }]}
-    >
+    <SafeAreaView style={[styles.screen, { paddingTop: insets.top }]}>      
       <View style={styles.container}>
-        {/* -- Location + Bell -- */}
+        {/* Location + Bell */}
         <LocationBar
           location="Wallace, Australia"
           onPressBell={() => {}}
           style={styles.locationBar}
         />
 
-        {/* -- Filter Pills -- */}
+        {/* Filter Pills */}
         <FilterTabs
           options={['Hotel', 'Homestay', 'Apart']}
           selected={filter}
@@ -58,7 +58,7 @@ export default function HomeScreen() {
           style={styles.filterTabs}
         />
 
-        {/* -- Near Location Section -- */}
+        {/* Near Location Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Near Location</Text>
           <TouchableOpacity>
@@ -80,7 +80,7 @@ export default function HomeScreen() {
           ))}
         </ScrollView>
 
-        {/* -- Popular Hotel Section -- */}
+        {/* Popular Hotel Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Popular Hotel</Text>
           <TouchableOpacity>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   locationBar: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   filterTabs: {
     marginBottom: 24,
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 22,
     marginBottom: 8,
   },
   sectionTitle: {
@@ -126,13 +127,13 @@ const styles = StyleSheet.create({
   seeAll: {
     fontSize: 14,
     fontWeight: '500',
-    color: Colors.light.primary,
+    color: Colors.light.tint,
   },
   horizontalList: {
     paddingVertical: 8,
   },
   verticalList: {
-    flex: 1,
+    marginBottom: 16,
   },
   verticalCard: {
     marginBottom: 16,

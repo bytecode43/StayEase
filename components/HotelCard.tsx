@@ -8,6 +8,7 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { theme } from '../constants/theme';
+import { useRouter } from 'expo-router';
 
 export type Hotel = {
   id: string;
@@ -21,8 +22,9 @@ export type Hotel = {
 type Props = { hotel: Hotel; horizontal?: boolean };
 
 export default function HotelCard({ hotel, horizontal = false }: Props) {
+  const router = useRouter();
   return (
-    <TouchableOpacity style={[styles.card, horizontal && styles.cardHorizontal]}>
+    <TouchableOpacity style={[styles.card, horizontal && styles.cardHorizontal]} onPress={() => router.push('/hotel-details')}>
       <Image
         source={hotel.image}
         style={[styles.image, horizontal && styles.imageHorizontal]}
